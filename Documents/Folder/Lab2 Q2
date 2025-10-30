@@ -1,1 +1,77 @@
-ll
+#include <stdio.h>
+
+#define numOfSubjects 5
+#define numOfStudent 30
+
+typedef struct
+{
+    char firstName[10];
+    char lastName[10];
+    int StudentID;
+    float subjectMarks[numOfSubjects];
+    int aggregateMarks;
+    char grade[10];
+
+} Student;
+
+Student students[numOfStudent];
+
+int main(){
+    enrol();
+    return 0;
+
+    
+}
+// Function to enter student marks.
+void enrol(){
+    for(int i = 0; i < numOfStudent; i++){
+        printf("Enter details for student %d\n", i + 1);
+        printf("Student ID: ");
+        scanf("%d", &students[i].StudentID);
+        char choice[4];
+        for (int j = 0; j < numOfSubjects; j++) {
+            printf("Do you want to enter student's marks? (\"Yes\" or \"No\"):");
+            scanf("%s", choice);
+            if (strcmp(choice, "Yes") == 0) {
+                printf("Enter marks for subject %d: ", j + 1);
+                scanf("%f", &students[i].subjectMarks[j]);
+            }
+            else if (strcmp(choice, "No") == 0) {
+                students[i].subjectMarks[j] = -1;
+                }
+        }
+        
+    }
+}
+// Function to calculate aggregate marks and assign grades
+void calculateAggregateAndGrades(int studentCount) {
+        int totalMarks = 0;
+        for (int j = 0; j < numOfSubjects; j++) {
+            totalMarks += students[studentCount].subjectMarks[j];
+        }
+        students[studentCount].aggregateMarks = totalMarks;
+        float averageMarks = (float)totalMarks / numOfSubjects;
+        if (averageMarks >= 85) {
+            students[studentCount].grade = 'HD';
+        } else if (averageMarks >= 75) {
+            students[studentCount].grade = 'D';
+        } else if (averageMarks >= 65) {
+            students[studentCount].grade = 'C';
+        } else if (averageMarks >= 50) {
+            students[studentCount].grade = 'P';
+        } else if (averageMarks < 50) {
+            students[studentCount].grade = 'F';
+        } else{
+            students[studentCount].grade = 'undefined';
+        }
+        
+}
+
+void searchUpdate(char LastName[10]){
+    for(int i = 0; i < numOfStudent; i++){
+        if(strcmp(students[i].lastName, LastName) == 0){
+            printf("Student found: %s %s\n", students[i].firstName, students[i].lastName);
+            printf("Do you want to update the marks? (\"Yes\" or \"No\"):");
+        }
+    }
+}
