@@ -39,9 +39,9 @@ void enrol(){
         printf("Student ID : ");
         scanf("%d", &students[i].StudentID);
         printf("Last Name: ");
-        scanf("%d", &students[i].lastName);
+        scanf("%s", &students[i].lastName);
         printf("First Name: ");
-        scanf("%d", &students[i].firstName);
+        scanf("%s", &students[i].firstName);
         printf("Subjects: \n");
         char choice[4];
         for (j = 0; j < numOfSubjects; j++) {
